@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ConnectData.Model;
 
-namespace ConnectData.DTOs
+namespace BusinessLogic.DTOs
 {
     public class AutoMapping : Profile
     {

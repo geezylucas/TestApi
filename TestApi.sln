@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApi", "TestApi\TestApi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectData", "ConnectData\ConnectData.csproj", "{070F1BB9-5E85-4007-B437-9F875F5A6896}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{8E995055-C73F-44F2-B14F-EAAA1A1D34C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{070F1BB9-5E85-4007-B437-9F875F5A6896}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{070F1BB9-5E85-4007-B437-9F875F5A6896}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{070F1BB9-5E85-4007-B437-9F875F5A6896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E995055-C73F-44F2-B14F-EAAA1A1D34C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E995055-C73F-44F2-B14F-EAAA1A1D34C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E995055-C73F-44F2-B14F-EAAA1A1D34C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E995055-C73F-44F2-B14F-EAAA1A1D34C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

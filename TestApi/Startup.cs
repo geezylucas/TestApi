@@ -3,15 +3,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ConnectData.Services;
+using BusinessLogic.Services;
 using ConnectData.Model;
-using ConnectData.DTOs;
+using BusinessLogic.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace TestApi
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,10 +24,19 @@ namespace TestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins, builder =>
+                {
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyOrigin();
+                });
+            });
             services.AddScoped<IAreaService, AreaServiceImpl>();
             services.AddDbContext<TestContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("dbTest")));
             services.AddAutoMapper(typeof(AutoMapping));
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,9 +47,9 @@ namespace TestApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 

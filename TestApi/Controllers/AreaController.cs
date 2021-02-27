@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ConnectData.Services;
-using ConnectData.DTOs;
+using BusinessLogic.Services;
+using BusinessLogic.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

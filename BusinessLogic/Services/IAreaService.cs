@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ConnectData.DTOs;
+using BusinessLogic.DTOs;
 
-namespace ConnectData.Services
+namespace BusinessLogic.Services
 {
     /* Interface to provide methods necessary to anyone */
     public interface IAreaService

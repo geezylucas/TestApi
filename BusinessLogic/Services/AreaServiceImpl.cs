@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ConnectData.Model;
-using ConnectData.DTOs;
+using BusinessLogic.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConnectData.Services
+namespace BusinessLogic.Services
 {
     public class AreaServiceImpl : IAreaService
     {

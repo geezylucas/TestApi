@@ -1,4 +1,4 @@
-﻿namespace ConnectData.DTOs
+﻿namespace BusinessLogic.DTOs
 {
     public class AreaDTO
     {
