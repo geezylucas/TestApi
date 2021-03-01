@@ -34,6 +34,9 @@ namespace ConnectData.Model
 
             modelBuilder.Entity<Area>(entity =>
             {
+                entity.HasIndex(e => e.Name, "idx_name")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
@@ -45,6 +48,9 @@ namespace ConnectData.Model
 
             modelBuilder.Entity<SubArea>(entity =>
             {
+                entity.HasIndex(e => e.Name, "idx_name")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AreaId).HasColumnName("areaId");

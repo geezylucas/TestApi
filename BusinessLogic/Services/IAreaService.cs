@@ -8,5 +8,11 @@ namespace BusinessLogic.Services
     public interface IAreaService
     {
         public Task<List<AreaDTO>> GetAreas();
+
+        public Task<AreaDTO> GetArea(int id);
+
+        public Task<ClassBase<AreaDTO>> InsertArea(AreaDTO area);
+
+        public string RemoveArea(int id, string name);
     }
 }
