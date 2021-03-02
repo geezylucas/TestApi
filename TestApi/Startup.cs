@@ -33,6 +33,7 @@ namespace TestApi
                     builder.AllowAnyOrigin();
                 });
             });
+            services.AddScoped<ISubAreaService, SubAreaServiceImpl>();
             services.AddScoped<IAreaService, AreaServiceImpl>();
             services.AddDbContext<TestContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("dbTest")));
             services.AddAutoMapper(typeof(AutoMapping));

@@ -8,7 +8,8 @@ namespace BusinessLogic.DTOs
         public AutoMapping()
         {
             CreateMap<Area, AreaDTO>();
-            CreateMap<AreaDTO, Area>();
+            CreateMap<SubArea, SubAreaDTO>();
+            CreateMap<SPSelectSubAreas, SubAreaDTO>();
         }
     }
 }

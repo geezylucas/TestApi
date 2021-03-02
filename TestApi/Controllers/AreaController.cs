@@ -53,6 +53,25 @@ namespace TestApi.Controllers
             return CreatedAtAction("GetArea", new { id = classBaseAreaDTO.AnyClass.Id }, classBaseAreaDTO.AnyClass);
         }
 
+        // PUT: api/area/1
+        [HttpPut("{id}")]
+        public ActionResult PutArea(int id, AreaDTO area)
+        {
+            if (id != area.Id)
+            {
+                return BadRequest();
+            }
+
+            string result = _areaService.EditArea(area);
+
+            if (!result.Equals("OK"))
+            {
+                return BadRequest(result);
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/area/1
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteArea(int id)

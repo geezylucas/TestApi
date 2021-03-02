@@ -15,6 +15,8 @@ namespace ConnectData.Model
         {
         }
 
+        public virtual DbSet<SPSelectSubAreas> SPSelectSubAreas { get; set; }
+
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<SubArea> SubAreas { get; set; }
         public virtual DbSet<User> Users { get; set; }

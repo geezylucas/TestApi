@@ -20,39 +20,26 @@ namespace BusinessLogic.Services
             _mapper = mapper;
         }
 
-        /// <summary>
-        /// Method to get all rows from Area Table through stored procedure call sp_select_area
-        /// </summary>
-        /// <returns></returns>
         public async Task<List<AreaDTO>> GetAreas()
         {
             var areasEntity = await _context.Areas.FromSqlRaw("EXEC sp_select_area").ToListAsync();
             return _mapper.Map<List<AreaDTO>>(areasEntity);
         }
 
-        /// <summary>
-        /// Method to get row by id from Area Table
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<AreaDTO> GetArea(int id)
         {
             var areasEntity = await _context.Areas.FromSqlInterpolated($"EXEC sp_select_area_by_id {id}").ToListAsync();
             return _mapper.Map<AreaDTO>(areasEntity.FirstOrDefault());
         }
 
-        /// <summary>
-        /// Method to insert row from Area Table
-        /// </summary>
-        /// <returns></returns>
         public async Task<ClassBase<AreaDTO>> InsertArea(AreaDTO area)
         {
             ClassBase<AreaDTO> classBaseAreaDTO = new ClassBase<AreaDTO>();
 
             try
             {
-                var areasEntity = await _context.Areas.FromSqlInterpolated($"EXEC sp_insert_area {area.Name}").ToListAsync();
-                classBaseAreaDTO.AnyClass = _mapper.Map<AreaDTO>(areasEntity.FirstOrDefault());
+                var areaEntity = await _context.Areas.FromSqlInterpolated($"EXEC sp_insert_area {area.Name}").ToListAsync();
+                classBaseAreaDTO.AnyClass = _mapper.Map<AreaDTO>(areaEntity.FirstOrDefault());
             }
             catch (SqlException ex)
             {
@@ -63,6 +50,8 @@ namespace BusinessLogic.Services
                         classBaseAreaDTO.AnyClass = null;
                         break;
                     default:
+                        classBaseAreaDTO.Error = $"Error: {ex.Message}";
+                        classBaseAreaDTO.AnyClass = null;
                         break;
                 }
             }
@@ -70,11 +59,20 @@ namespace BusinessLogic.Services
             return classBaseAreaDTO;
         }
 
-        /// <summary>
-        /// Method to delete row from Area Table
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        public string EditArea(AreaDTO area)
+        {
+            try
+            {
+                _context.Database.ExecuteSqlInterpolated($"EXEC sp_update_area {area.Id}, {area.Name}");
+            }
+            catch (SqlException ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+
+            return "OK";
+        }
+
         public string RemoveArea(int id, string name)
         {
             try
@@ -83,13 +81,11 @@ namespace BusinessLogic.Services
             }
             catch (SqlException ex)
             {
-                switch (ex.Number)
+                return ex.Number switch
                 {
-                    case 547:
-                        return $"No se puede borrar el registro {name}, existe relación con algunas subáreas.";
-                    default:
-                        break;
-                }
+                    547 => $"No se puede borrar el registro {name}, existe relación con algunas subáreas.",
+                    _ => $"Error: {ex.Message}",
+                };
             }
 
             return "OK";
