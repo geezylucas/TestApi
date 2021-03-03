@@ -11,7 +11,7 @@ namespace BusinessLogic.DTOs
             CreateMap<SubArea, SubAreaDTO>();
             CreateMap<SPSelectSubAreas, SubAreaDTO>();
             CreateMap<User, UserDTO>();
-            CreateMap<SPSelectUsers, UserDTO>();
+            CreateMap<SPSelectUsers, UserDTO>().ForMember(b => b.Password, p => p.Ignore());
         }
     }
 }

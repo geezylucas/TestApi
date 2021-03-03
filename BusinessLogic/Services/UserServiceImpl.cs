@@ -28,7 +28,7 @@ namespace BusinessLogic.Services
 
         public async Task<UserDTO> GetUser(int id)
         {
-            var userEntity = await _context.SPSelectUsers.FromSqlInterpolated($"EXEC sp_select_user_by_id {id}").ToListAsync();
+            var userEntity = await _context.Users.FromSqlInterpolated($"EXEC sp_select_user_by_id {id}").ToListAsync();
             return _mapper.Map<UserDTO>(userEntity.FirstOrDefault());
         }
 
