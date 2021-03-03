@@ -10,6 +10,8 @@ namespace BusinessLogic.DTOs
             CreateMap<Area, AreaDTO>();
             CreateMap<SubArea, SubAreaDTO>();
             CreateMap<SPSelectSubAreas, SubAreaDTO>();
+            CreateMap<User, UserDTO>();
+            CreateMap<SPSelectUsers, UserDTO>();
         }
     }
 }

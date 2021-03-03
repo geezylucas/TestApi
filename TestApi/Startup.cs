@@ -35,6 +35,7 @@ namespace TestApi
             });
             services.AddScoped<ISubAreaService, SubAreaServiceImpl>();
             services.AddScoped<IAreaService, AreaServiceImpl>();
+            services.AddScoped<IUserService, UserServiceImpl>();
             services.AddDbContext<TestContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("dbTest")));
             services.AddAutoMapper(typeof(AutoMapping));
             services.AddControllers();
