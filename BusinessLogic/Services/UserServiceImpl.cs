@@ -86,5 +86,24 @@ namespace BusinessLogic.Services
 
             return "OK";
         }
+
+        public async Task<string> Authentication(UserDTO user)
+        {
+            var usersEntity = await _context.Users.FromSqlInterpolated($"EXEC sp_select_user_by_email {user.Email}").ToListAsync();
+
+            if (!usersEntity.Any())
+            {
+                return "Usuario no existe";
+            }
+
+            var userEntity = usersEntity.FirstOrDefault();
+
+            if (!userEntity.Password.Equals(user.Password))
+            {
+                return "Usuario o contraseña incorrectos";
+            }
+
+            return "OK";
+        }
     }
 }

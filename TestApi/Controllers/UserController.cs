@@ -38,7 +38,6 @@ namespace TestApi.Controllers
             return Ok(user);
         }
 
-
         // POST: api/user
         [HttpPost]
         public async Task<ActionResult<UserDTO>> PostUser(UserDTO user)
@@ -51,6 +50,21 @@ namespace TestApi.Controllers
             }
 
             return CreatedAtAction("GetUser", new { id = classBaseUserDTO.AnyClass.Id }, classBaseUserDTO.AnyClass);
+        }
+
+        // POST: api/user/authentication
+        [Route("authentication")]
+        [HttpPost]
+        public async Task<ActionResult<string>> PostAuthentication(UserDTO user)
+        {
+            var response = await _userService.Authentication(user);
+
+            if (!response.Equals("OK"))
+            {
+                return BadRequest(response);
+            }
+
+            return Ok();
         }
 
         // PUT: api/user/1

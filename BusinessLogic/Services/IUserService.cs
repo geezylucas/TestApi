@@ -11,6 +11,8 @@ namespace BusinessLogic.Services
 
         public Task<UserDTO> GetUser(int id);
 
+        public Task<string> Authentication(UserDTO user);
+
         public Task<ClassBase<UserDTO>> InsertUser(UserDTO user);
 
         public string EditUser(UserDTO user);
