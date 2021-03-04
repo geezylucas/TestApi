@@ -55,14 +55,14 @@ namespace TestApi.Controllers
 
         // PUT: api/subarea/1
         [HttpPut("{id}")]
-        public ActionResult PutSubArea(int id, SubAreaDTO subArea)
+        public async Task<ActionResult> PutSubArea(int id, SubAreaDTO subArea)
         {
             if (id != subArea.Id)
             {
                 return BadRequest();
             }
 
-            string result = _subAreaService.EditSubArea(subArea);
+            string result = await _subAreaService.EditSubArea(subArea);
 
             if (!result.Equals("OK"))
             {
@@ -83,7 +83,7 @@ namespace TestApi.Controllers
                 return NotFound();
             }
 
-            string result = _subAreaService.RemoveSubArea(id, subArea.Name);
+            string result = await _subAreaService.RemoveSubArea(id, subArea.Name);
 
             if (!result.Equals("OK"))
             {

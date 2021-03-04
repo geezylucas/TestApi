@@ -59,11 +59,11 @@ namespace BusinessLogic.Services
             return classBaseAreaDTO;
         }
 
-        public string EditArea(AreaDTO area)
+        public async Task<string> EditArea(AreaDTO area)
         {
             try
             {
-                _context.Database.ExecuteSqlInterpolated($"EXEC sp_update_area {area.Id}, {area.Name}");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC sp_update_area {area.Id}, {area.Name}");
             }
             catch (SqlException ex)
             {
@@ -73,11 +73,11 @@ namespace BusinessLogic.Services
             return "OK";
         }
 
-        public string RemoveArea(int id, string name)
+        public async Task<string> RemoveArea(int id, string name)
         {
             try
             {
-                _context.Database.ExecuteSqlInterpolated($"EXEC sp_delete_area {id}");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC sp_delete_area {id}");
             }
             catch (SqlException ex)
             {

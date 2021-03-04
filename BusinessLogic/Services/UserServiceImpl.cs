@@ -59,11 +59,11 @@ namespace BusinessLogic.Services
             return classBaseUserDTO;
         }
 
-        public string EditUser(UserDTO user)
+        public async Task<string> EditUser(UserDTO user)
         {
             try
             {
-                _context.Database.ExecuteSqlInterpolated($"EXEC sp_update_user {user.Id}, {user.Password}, {user.Name}, {user.Lastname}, {user.SecondLastname}, {user.SubAreaId}");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC sp_update_user {user.Id}, {user.Password}, {user.Name}, {user.Lastname}, {user.SecondLastname}, {user.SubAreaId}");
             }
             catch (SqlException ex)
             {
@@ -73,11 +73,11 @@ namespace BusinessLogic.Services
             return "OK";
         }
 
-        public string RemoveUser(int id)
+        public async Task<string> RemoveUser(int id)
         {
             try
             {
-                _context.Database.ExecuteSqlInterpolated($"EXEC sp_delete_user {id}");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"EXEC sp_delete_user {id}");
             }
             catch (SqlException ex)
             {

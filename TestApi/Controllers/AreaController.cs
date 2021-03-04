@@ -55,14 +55,14 @@ namespace TestApi.Controllers
 
         // PUT: api/area/1
         [HttpPut("{id}")]
-        public ActionResult PutArea(int id, AreaDTO area)
+        public async Task<ActionResult> PutArea(int id, AreaDTO area)
         {
             if (id != area.Id)
             {
                 return BadRequest();
             }
 
-            string result = _areaService.EditArea(area);
+            string result = await _areaService.EditArea(area);
 
             if (!result.Equals("OK"))
             {
@@ -83,7 +83,7 @@ namespace TestApi.Controllers
                 return NotFound();
             }
 
-            string result = _areaService.RemoveArea(id, area.Name);
+            string result = await _areaService.RemoveArea(id, area.Name);
 
             if (!result.Equals("OK"))
             {

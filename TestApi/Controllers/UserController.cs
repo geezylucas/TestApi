@@ -69,14 +69,14 @@ namespace TestApi.Controllers
 
         // PUT: api/user/1
         [HttpPut("{id}")]
-        public ActionResult PutUser(int id, UserDTO user)
+        public async Task<ActionResult> PutUser(int id, UserDTO user)
         {
             if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            string result = _userService.EditUser(user);
+            string result = await _userService.EditUser(user);
 
             if (!result.Equals("OK"))
             {
@@ -97,7 +97,7 @@ namespace TestApi.Controllers
                 return NotFound();
             }
 
-            string result = _userService.RemoveUser(id);
+            string result = await _userService.RemoveUser(id);
 
             if (!result.Equals("OK"))
             {

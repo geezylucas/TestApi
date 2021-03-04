@@ -13,8 +13,8 @@ namespace BusinessLogic.Services
 
         public Task<ClassBase<SubAreaDTO>> InsertSubArea(SubAreaDTO subArea);
 
-        public string EditSubArea(SubAreaDTO subArea);
+        public Task<string> EditSubArea(SubAreaDTO subArea);
 
-        public string RemoveSubArea(int id, string name);
+        public Task<string> RemoveSubArea(int id, string name);
     }
 }
